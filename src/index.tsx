@@ -18,7 +18,7 @@ function App() {
           <Route path="/settings" component={Settings} />
           <Route path="/profile" component={Profile} />
           <Route path="/restaurant-list" component={RestaurantList} />
-          <Route path="" component={Menu} />
+          <Route path="/menu/:restaurantID" sensitive component={Menu} />
           <Route path="*" component={NotFound} />
         </Switch>
       </Layout>

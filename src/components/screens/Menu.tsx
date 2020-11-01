@@ -1,5 +1,8 @@
 import { Card, CardContent, CardMedia, Typography } from '@material-ui/core';
 import './menu.css';
+import { QueryRenderer, graphql } from 'react-relay';
+import environment from '../../api/setup';
+import { useRouteMatch } from 'react-router-dom';
 
 import React from 'react';
 
@@ -39,26 +42,50 @@ interface Menu {
   restaurantID: string;
 }
 
-const menu: Menu = {
-  products: [
-    {
-      name: 'Taco de Labio',
-      description:
-        'Taco de labio con tortilla a elección, salsa roja, martajada, verde sin picante y mexicana con guacamole, frijoles y cebollas guisadas.',
-      price: 26,
-      imageURL:
-        'https://images.rappi.com.mx/products/978532747-1598533763088.png?d=128x90&e=webp',
-    },
-  ],
-  restaurantID: 'taco-loco',
-};
+interface RenderProps {
+  error: Error;
+  props: {
+    menu: Menu;
+  };
+}
+
+const queryMenu = graphql`
+  query MenuQuery($restaurantID: ID) {
+    menu(restaurantID: $restaurantID) {
+      restaurantID
+      products {
+        name
+        description
+        price
+        imageURL
+      }
+    }
+  }
+`;
 
 export function Menu() {
+  const match = useRouteMatch();
+  const variables = match.params;
+
   return (
     <div className="menu-container">
-      {menu.products.map((product) => (
-        <MenuItem key={product.name} product={product} />
-      ))}
+      <QueryRenderer
+        environment={environment}
+        query={queryMenu}
+        variables={variables}
+        render={({ error, props }: RenderProps) => {
+          if (error) {
+            return <div>Error</div>;
+          }
+          if (!props) {
+            return <div>Loading...</div>;
+          }
+
+          return props.menu.products.map((product) => (
+            <MenuItem key={product.name} product={product} />
+          ));
+        }}
+      />
     </div>
   );
 }
