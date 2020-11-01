@@ -5,7 +5,8 @@
   "main": "src/index.js",
   "scripts": {
     "start": "webpack-dev-server",
-    "build": "webpack",
+    "clean": "rm -rf dist/",
+    "build": "npm run clean && webpack",
     "relay": "relay-compiler --src ./src --schema ./data/schema.graphql --language typescript --artifactDirectory ./src/components/screens/__generated__"
   },
   "engines": {
