@@ -1,10 +1,12 @@
 import { Typography, TextField } from '@material-ui/core';
 import { AccountBox as AccountBoxIcon } from '@material-ui/icons';
+import { useHistory } from 'react-router-dom';
 import { Autocomplete } from '@material-ui/lab';
 import './home.css';
 
 import React from 'react';
 export function Home() {
+  const history = useHistory();
   const locations = [
     {
       country: {
@@ -36,6 +38,7 @@ export function Home() {
           <Typography
             onClick={() => {
               console.log('option', option);
+              history.push('restaurant-list');
             }}
             noWrap
           >

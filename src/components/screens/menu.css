@@ -1,0 +1,24 @@
+.menu-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    color: gray;
+    align-items: center;
+    font-size: 60px;
+    width: 600px;
+    margin: 0 auto;
+}
+
+.menu-element {
+    font-size: 14px;
+}
+
+.menu-element-card {
+    min-height: 250px;
+    width: 400px;
+    margin-bottom: 50px;
+}
+
+.menu-element-img {
+    height: 150px;
+}

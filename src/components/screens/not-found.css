@@ -1,0 +1,23 @@
+.notfound-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    color: gray;
+    align-items: center;
+    font-size: 60px;
+    width: 600px;
+    margin: 0 auto;
+    padding: 35px;
+}
+
+
+.notfound-container .header {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+}
+
+.notfound-container img {
+    width: 40%;
+}
