@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { ReactChild } from 'react';
 import { Header } from './Header';
 import './layout.css';
 
-export const Layout = (props) => {
+interface LayoutProps {
+  children: ReactChild;
+}
+
+export const Layout = (props: LayoutProps) => {
   return (
     <div className="layout">
       <Header />

@@ -1,0 +1,21 @@
+.settings-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    color: gray;
+    align-items: center;
+    font-size: 60px;
+    width: 600px;
+    margin: 0 auto;
+    border-radius: 10px;
+    padding: 35px;
+    box-shadow: 1px 1px 5px grey;
+}
+
+.settings-container .header {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: solid 1px;
+}

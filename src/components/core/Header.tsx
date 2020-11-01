@@ -1,12 +1,5 @@
-import {
-  AppBar,
-  IconButton,
-  Toolbar,
-  Typography
-} from '@material-ui/core';
-import {
-  Menu as MenuIcon
-} from '@material-ui/icons';
+import { AppBar, IconButton, Toolbar, Typography } from '@material-ui/core';
+import { Menu as MenuIcon } from '@material-ui/icons';
 import React from 'react';
 import { DrawerMenu } from './Drawer';
 import './header.css';

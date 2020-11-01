@@ -8,6 +8,7 @@ import {
 import {
   ExitToApp as ExitToAppIcon,
   Settings as SettingsIcon,
+  AccountBox as AccountBoxIcon,
 } from '@material-ui/icons';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
@@ -23,6 +24,11 @@ const menuConfigItems: MenuConfigItem[] = [
     label: 'Settings',
     path: '/settings',
     Icon: SettingsIcon,
+  },
+  {
+    label: 'Profile',
+    path: '/profile',
+    Icon: AccountBoxIcon,
   },
   {
     label: 'Logout',
