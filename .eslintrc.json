@@ -5,11 +5,18 @@
     },
     "extends": [
       "eslint:recommended",
+      "plugin:prettier/recommended",
       "plugin:react/recommended",
       "plugin:react-hooks/recommended",
       "plugin:@typescript-eslint/recommended",
       "plugin:relay/recommended"
     ],
+    "settings": {
+      "react": {
+        "pragma": "React",
+        "version": "detect"
+      }
+    },
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
       "ecmaFeatures": {
@@ -21,11 +28,9 @@
     "ignorePatterns": ["*.config.js"],
     "plugins": ["react", "@typescript-eslint", "react-hooks", "relay"],
     "rules": {
-      "indent": ["error", 2],
       "relay/unused-fields": "warn",
       "linebreak-style": ["error", "unix"],
       "quotes": ["error", "single"],
-      "semi": ["error", "always"],
       "@typescript-eslint/explicit-module-boundary-types": "off"
     }
   }

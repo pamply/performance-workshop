@@ -11,7 +11,11 @@ module.exports = {
                 test: /\.tsx?$/,
                 exclude: /node_modules/,
                 loader: 'babel-loader',
-            }
+            },
+            {
+                test: /.css$/,
+                use: ['style-loader', 'css-loader'],
+            },
         ]
     },
     resolve: {
@@ -26,6 +30,7 @@ module.exports = {
         host: "localhost",
         port: 9000,
         inline: false,
+        historyApiFallback: true,
         contentBase: [
             path.join(__dirname, 'assets'),
             path.join(__dirname, 'dist')

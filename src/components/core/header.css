@@ -1,0 +1,35 @@
+.drawer-container {
+    width: 20em;
+  }
+  
+  .search-container {
+    align-items: center;
+    color: white;
+    display: flex;
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 4px;
+    padding: 5px;
+  }
+  
+  .toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .left-side-menu-container,
+  .right-side-menu-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .right-side-menu-container {
+    justify-content: space-around;
+    min-width: 20em;
+  }
+  
+  .autocomplete-texfield {
+    min-width: 10em;
+  }
+  
