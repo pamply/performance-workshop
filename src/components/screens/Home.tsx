@@ -6,21 +6,34 @@ import {
   ListItemText,
 } from '@material-ui/core';
 import { AccountBox as AccountBoxIcon } from '@material-ui/icons';
+import { QueryRenderer, graphql } from 'react-relay';
 import './home.css';
+import environment from '../../api/setup';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
-const locations = ['d', 'du'];
+const locationListquery = graphql`
+  query HomeQuery($input: String) {
+    locations(input: $input) {
+      name
+    }
+  }
+`;
+
+interface Location {
+  name: string;
+}
+
+interface RenderProps {
+  error: Error;
+  props?: {
+    locations: Location[];
+  };
+}
 
 const Autocomplete = () => {
   const [value, setValue] = useState('');
-  const [indexSelected, setIndexSelected] = useState(-1);
   const [openList, setOpenList] = useState(false);
-
-  useEffect(() => {
-    setValue(locations[indexSelected]);
-    setOpenList(false);
-  }, [indexSelected]);
 
   return (
     <div className="autocomplete-container">
@@ -40,20 +53,37 @@ const Autocomplete = () => {
         }}
       />
       {openList && (
-        <List>
-          {locations.map((location, index) => (
-            <ListItem
-              onClick={() => {
-                setIndexSelected(index);
-                setOpenList(false);
-              }}
-              button
-              key={location}
-            >
-              <ListItemText primary={location} />
-            </ListItem>
-          ))}
-        </List>
+        <QueryRenderer
+          environment={environment}
+          variables={{
+            input: value,
+          }}
+          query={locationListquery}
+          render={({ error, props }: RenderProps) => {
+            if (error) {
+              return <div>Error!</div>;
+            }
+            if (!props) {
+              return null;
+            }
+            return (
+              <List>
+                {props.locations.map((location) => (
+                  <ListItem
+                    onClick={() => {
+                      setValue(location.name);
+                      setOpenList(false);
+                    }}
+                    button
+                    key={location.name}
+                  >
+                    <ListItemText primary={location.name} />
+                  </ListItem>
+                ))}
+              </List>
+            );
+          }}
+        />
       )}
     </div>
   );

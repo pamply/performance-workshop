@@ -15,7 +15,7 @@ function fetchQuery(operation, variables) {
       return response.json();
     })
     .catch((error) => {
-      console.log(JSON.stringify(error));
+      console.error(JSON.stringify(error));
     });
 }
 

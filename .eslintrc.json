@@ -31,7 +31,8 @@
       "relay/unused-fields": "warn",
       "linebreak-style": ["error", "unix"],
       "quotes": ["error", "single"],
-      "@typescript-eslint/explicit-module-boundary-types": "off"
+      "@typescript-eslint/explicit-module-boundary-types": "off",
+      "react/prop-types": "off"
     }
   }
   

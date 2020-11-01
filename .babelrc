@@ -1,4 +1,7 @@
 {
+    "plugins": [
+        ["relay", { "artifactDirectory": "./src/components/screens/__generated__" }]
+    ],
     "presets": [
         "@babel/preset-env",
         "@babel/preset-react", 

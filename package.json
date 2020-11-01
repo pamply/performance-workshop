@@ -25,9 +25,8 @@
     "@material-ui/core": "^4.11.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-router-dom": "^5.2.0",
-    "relay-runtime": "^10.0.1",
-    "react-relay": "0.0.0-experimental-183bdd28"
+    "react-relay": "0.0.0-experimental-183bdd28",
+    "react-router-dom": "^5.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.3",
@@ -38,6 +37,7 @@
     "@typescript-eslint/eslint-plugin": "^4.6.0",
     "@typescript-eslint/parser": "^4.6.0",
     "babel-loader": "^8.1.0",
+    "babel-plugin-relay": "^10.0.1",
     "css-loader": "^5.0.0",
     "eslint": "^7.12.1",
     "eslint-config-prettier": "^6.15.0",
@@ -46,6 +46,8 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-plugin-relay": "^1.8.1",
     "prettier": "^2.1.2",
+    "relay-compiler": "^10.0.1",
+    "relay-compiler-language-typescript": "^13.0.1",
     "style-loader": "^2.0.0",
     "typescript": "^4.0.5",
     "webpack": "^4.29.0",
