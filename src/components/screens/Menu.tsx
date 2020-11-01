@@ -64,7 +64,7 @@ const queryMenu = graphql`
   }
 `;
 
-export function Menu() {
+export default function Menu() {
   const match = useRouteMatch();
   const variables = match.params;
 

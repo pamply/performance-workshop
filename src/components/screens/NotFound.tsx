@@ -2,7 +2,7 @@ import { Typography } from '@material-ui/core';
 import './not-found.css';
 
 import React from 'react';
-export function NotFound() {
+export default function NotFound() {
   return (
     <div className="notfound-container">
       <div className="header">

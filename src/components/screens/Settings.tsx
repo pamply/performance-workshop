@@ -3,7 +3,7 @@ import { Settings as SettingsIcon } from '@material-ui/icons';
 import './settings.css';
 
 import React from 'react';
-export function Settings() {
+export default function Settings() {
   return (
     <div className="settings-container">
       <div className="header">

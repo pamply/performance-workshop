@@ -76,7 +76,7 @@ const queryRestaurantList = graphql`
   }
 `;
 
-export function RestaurantList() {
+export default function RestaurantList() {
   return (
     <div className="restaurant-list-container">
       <QueryRenderer
