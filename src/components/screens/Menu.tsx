@@ -3,6 +3,7 @@ import './menu.css';
 import { QueryRenderer, graphql } from 'react-relay';
 import environment from '../../api/setup';
 import { useRouteMatch } from 'react-router-dom';
+import { SkeletonLoader } from '../core/SkeletonLoader';
 
 import React from 'react';
 
@@ -78,7 +79,7 @@ export function Menu() {
             return <div>Error</div>;
           }
           if (!props) {
-            return <div>Loading...</div>;
+            return <SkeletonLoader />;
           }
 
           return props.menu.products.map((product) => (

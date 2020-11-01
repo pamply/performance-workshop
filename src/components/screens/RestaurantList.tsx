@@ -9,6 +9,7 @@ import {
 } from '@material-ui/core';
 import { QueryRenderer, graphql } from 'react-relay';
 import './restaurant-list.css';
+import { SkeletonLoader } from '../core/SkeletonLoader';
 
 import React from 'react';
 import environment from '../../api/setup';
@@ -87,7 +88,7 @@ export function RestaurantList() {
             return <div>Error</div>;
           }
           if (!props) {
-            return <div>Loading...</div>;
+            return <SkeletonLoader />;
           }
           return props.restaurants.map((restaurant) => (
             <RestaurantItem key={restaurant.id} restaurant={restaurant} />
