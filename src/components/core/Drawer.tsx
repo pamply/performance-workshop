@@ -9,6 +9,7 @@ import {
   ExitToApp as ExitToAppIcon,
   Settings as SettingsIcon,
   AccountBox as AccountBoxIcon,
+  Home as HomeIcon,
 } from '@material-ui/icons';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
@@ -20,6 +21,11 @@ interface MenuConfigItem {
 }
 
 const menuConfigItems: MenuConfigItem[] = [
+  {
+    label: 'Home',
+    path: '/',
+    Icon: HomeIcon,
+  },
   {
     label: 'Settings',
     path: '/settings',
@@ -54,7 +60,8 @@ export const DrawerMenu = ({ open, setOpen }: any) => {
               button
               key={path}
               onClick={() => {
-                history.push('/settings');
+                setOpen(false);
+                history.push(path);
               }}
             >
               <ListItemIcon>
