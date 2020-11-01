@@ -7,9 +7,12 @@ import {
   CardMedia,
   Typography,
 } from '@material-ui/core';
+import { QueryRenderer, graphql } from 'react-relay';
 import './restaurant-list.css';
 
 import React from 'react';
+import environment from '../../api/setup';
+
 enum Category {
   SEAFOOD = 'Seafood',
   CHINESE = 'Chinese',
@@ -17,39 +20,24 @@ enum Category {
   MEXICAN = 'Mexican',
 }
 
-interface RestaurantItemDefinition {
+interface Restaurant {
   id: string;
   name: string;
   description: string;
   imageURL: string;
   categories: Category[];
 }
-interface RestaurantItemProps {
-  restaurant: RestaurantItemDefinition;
+
+interface RenderProps {
+  error: Error;
+  props?: {
+    restaurants: Restaurant[];
+  };
 }
 
-const restaurants: RestaurantItemDefinition[] = [
-  {
-    id: 'taco-loco',
-    name: 'Tacho loco',
-    description: 'Best tacos ever',
-    imageURL:
-      'data:image/jpeg;base64,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',
-    categories: [Category.MEXICAN],
-  },
-  {
-    id: 'my-sushi',
-    name: 'My sushi',
-    description: 'Best sushi ever',
-    imageURL:
-      'https://static.wixstatic.com/media/2cd43b_e5828aa119524592ab00126dfa48a944~mv2.png/v1/fill/w_720,h_716,fp_0.50_0.50,lg_1,q_95/2cd43b_e5828aa119524592ab00126dfa48a944~mv2.png',
-    categories: [Category.JAPANESE],
-  },
-];
-
-const RestaurantItem = (props: RestaurantItemProps) => {
+const RestaurantItem = ({ restaurant }: { restaurant: Restaurant }) => {
   const history = useHistory();
-  const { name, description, imageURL, id } = props.restaurant;
+  const { name, description, imageURL, id } = restaurant;
   return (
     <div className="restaurant-element">
       <Card className={'restaurant-element-card'}>
@@ -76,12 +64,36 @@ const RestaurantItem = (props: RestaurantItemProps) => {
   );
 };
 
+const queryRestaurantList = graphql`
+  query RestaurantListQuery {
+    restaurants {
+      id
+      name
+      description
+      imageURL
+    }
+  }
+`;
+
 export function RestaurantList() {
   return (
     <div className="restaurant-list-container">
-      {restaurants.map((restaurant) => (
-        <RestaurantItem key={restaurant.id} restaurant={restaurant} />
-      ))}
+      <QueryRenderer
+        environment={environment}
+        variables={{}}
+        query={queryRestaurantList}
+        render={({ error, props }: RenderProps) => {
+          if (error) {
+            return <div>Error</div>;
+          }
+          if (!props) {
+            return <div>Loading...</div>;
+          }
+          return props.restaurants.map((restaurant) => (
+            <RestaurantItem key={restaurant.id} restaurant={restaurant} />
+          ));
+        }}
+      />
     </div>
   );
 }

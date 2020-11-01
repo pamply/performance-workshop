@@ -5,6 +5,7 @@ import {
   ListItem,
   ListItemText,
 } from '@material-ui/core';
+import { useHistory } from 'react-router-dom';
 import { AccountBox as AccountBoxIcon } from '@material-ui/icons';
 import { QueryRenderer, graphql } from 'react-relay';
 import './home.css';
@@ -34,7 +35,16 @@ interface RenderProps {
 const Autocomplete = () => {
   const [value, setValue] = useState('');
   const [openList, setOpenList] = useState(false);
-
+  const history = useHistory();
+  function selectItem(value: string) {
+    return () => {
+      setValue(value);
+      setOpenList(false);
+      setTimeout(() => {
+        history.push('/restaurant-list');
+      });
+    };
+  }
   return (
     <div className="autocomplete-container">
       <TextField
@@ -70,10 +80,7 @@ const Autocomplete = () => {
               <List>
                 {props.locations.map((location) => (
                   <ListItem
-                    onClick={() => {
-                      setValue(location.name);
-                      setOpenList(false);
-                    }}
+                    onClick={selectItem(location.name)}
                     button
                     key={location.name}
                   >
