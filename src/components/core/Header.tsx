@@ -21,7 +21,7 @@ export const Header = () => {
   const [open, setOpen] = React.useState(false);
   return (
     <div className="header">
-      <AppBar position="absolute">
+      <AppBar>
         <Toolbar>
           <div className={'toolbar'}>
             <LeftSideMenu open={open} setOpen={setOpen} />

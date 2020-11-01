@@ -1,0 +1,53 @@
+type User {
+  name: String
+  email: String
+}
+
+type Location {
+  name: String
+}
+
+type Product {
+  name: String
+  description: String
+  price: Int
+  imageURL: String
+}
+
+type Menu {
+  restaurantID: ID
+  products: [Product]
+}
+
+type SelectedProduct {
+  product: Product
+  quantity: Int
+}
+
+type Order {
+  selectedProducts: [SelectedProduct]
+}
+
+type Query {
+  users: [User]
+  locations(input: String, limit: Int): [Location]
+  restaurants: [Restaurant]
+  menu(restaurantID: ID): Menu
+  currentOrder(id: ID): Order
+}
+
+enum Category {
+  Seafood
+  Chinese
+  Japanese
+  Mexican
+  Italian
+}
+
+type Restaurant {
+  id: ID
+  name: String
+  description: String
+  imageURL: String
+  categories: [Category]
+}

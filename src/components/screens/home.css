@@ -5,7 +5,6 @@
     color: gray;
     align-items: center;
     font-size: 60px;
-    width: 600px;
     margin: 0 auto;
     border-radius: 10px;
     padding: 35px;
@@ -16,4 +15,16 @@
     flex-direction: row;
     margin-bottom: 30px;
     padding-bottom: 25px;
+}
+
+.home-container .autocomplete-container {
+    display:flex;
+    width: 40%;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.home-container .autocomplete-textfield {
+    margin-left: 16px;
+    margin-right: 16px;
 }
