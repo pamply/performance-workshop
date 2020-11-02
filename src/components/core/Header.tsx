@@ -20,7 +20,7 @@ const LeftSideMenu = ({ open, setOpen }: any) => (
   </div>
 );
 
-export const Header = () => {
+const Header = () => {
   const [open, setOpen] = React.useState(false);
   return (
     <div className="header">
@@ -35,3 +35,5 @@ export const Header = () => {
     </div>
   );
 };
+
+export default Header;
