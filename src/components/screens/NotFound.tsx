@@ -1,4 +1,4 @@
-import { Typography } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
 import './not-found.css';
 
 import React from 'react';

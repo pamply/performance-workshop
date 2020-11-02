@@ -1,5 +1,5 @@
-import { Typography } from '@material-ui/core';
-import { Settings as SettingsIcon } from '@material-ui/icons';
+import Typography from '@material-ui/core/Typography';
+import SettingsIcon from '@material-ui/icons/Settings';
 import './settings.css';
 
 import React from 'react';

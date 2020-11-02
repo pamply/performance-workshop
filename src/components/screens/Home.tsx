@@ -1,15 +1,13 @@
-import {
-  Typography,
-  TextField,
-  List,
-  ListItem,
-  ListItemText,
-} from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
 import { useHistory } from 'react-router-dom';
 import { AccountBox as AccountBoxIcon } from '@material-ui/icons';
 import { QueryRenderer, graphql } from 'react-relay';
+import { useRelayEnvironment } from 'react-relay/hooks';
 import './home.css';
-import environment from '../../api/setup';
 
 import React, { useState } from 'react';
 
@@ -36,6 +34,8 @@ const Autocomplete = () => {
   const [value, setValue] = useState('');
   const [openList, setOpenList] = useState(false);
   const history = useHistory();
+  const environment = useRelayEnvironment();
+
   function selectItem(value: string) {
     return () => {
       setValue(value);

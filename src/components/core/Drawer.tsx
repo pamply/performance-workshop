@@ -1,16 +1,13 @@
-import {
-  Drawer,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-} from '@material-ui/core';
-import {
-  ExitToApp as ExitToAppIcon,
-  Settings as SettingsIcon,
-  AccountBox as AccountBoxIcon,
-  Home as HomeIcon,
-} from '@material-ui/icons';
+import Drawer from '@material-ui/core/Drawer';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import SettingsIcon from '@material-ui/icons/Settings';
+import AccountBoxIcon from '@material-ui/icons/AccountBox';
+import HomeIcon from '@material-ui/icons/Home';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 

@@ -1,18 +1,17 @@
 import { useHistory } from 'react-router-dom';
-import {
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  CardMedia,
-  Typography,
-} from '@material-ui/core';
+import Button from '@material-ui/core/Button';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Typography from '@material-ui/core/Typography';
 import { QueryRenderer, graphql } from 'react-relay';
+import { useRelayEnvironment } from 'react-relay/hooks';
+
 import './restaurant-list.css';
 import { SkeletonLoader } from '../core/SkeletonLoader';
 
 import React from 'react';
-import environment from '../../api/setup';
 
 enum Category {
   SEAFOOD = 'Seafood',
@@ -77,6 +76,7 @@ const queryRestaurantList = graphql`
 `;
 
 export default function RestaurantList() {
+  const environment = useRelayEnvironment();
   return (
     <div className="restaurant-list-container">
       <QueryRenderer

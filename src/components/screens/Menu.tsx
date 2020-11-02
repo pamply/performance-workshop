@@ -1,9 +1,13 @@
-import { Card, CardContent, CardMedia, Typography } from '@material-ui/core';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Typography from '@material-ui/core/Typography';
+
 import './menu.css';
 import { QueryRenderer, graphql } from 'react-relay';
-import environment from '../../api/setup';
 import { useRouteMatch } from 'react-router-dom';
 import { SkeletonLoader } from '../core/SkeletonLoader';
+import { useRelayEnvironment } from 'react-relay/hooks';
 
 import React from 'react';
 
@@ -67,7 +71,7 @@ const queryMenu = graphql`
 export default function Menu() {
   const match = useRouteMatch();
   const variables = match.params;
-
+  const environment = useRelayEnvironment();
   return (
     <div className="menu-container">
       <QueryRenderer

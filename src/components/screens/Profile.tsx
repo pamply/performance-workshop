@@ -1,5 +1,5 @@
-import { Typography } from '@material-ui/core';
-import { AccountBox as AccountBoxIcon } from '@material-ui/icons';
+import Typography from '@material-ui/core/Typography';
+import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import './profile.css';
 
 import React from 'react';
