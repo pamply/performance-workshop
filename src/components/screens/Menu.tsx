@@ -1,9 +1,17 @@
-import { Card, CardContent, CardMedia, Typography } from '@material-ui/core';
+import {
+  Card,
+  CardContent,
+  CardMedia,
+  Typography,
+  CardActions,
+  Button,
+} from '@material-ui/core';
 import './menu.css';
 import { QueryRenderer, graphql } from 'react-relay';
 import environment from '../../api/setup';
 import { useRouteMatch } from 'react-router-dom';
 import { SkeletonLoader } from '../core/SkeletonLoader';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
 import React from 'react';
 
@@ -16,9 +24,10 @@ interface Product {
 
 interface MenuItemProps {
   product: Product;
+  addItem: any;
 }
 
-const MenuItem = ({ product }: MenuItemProps) => {
+const MenuItem = React.memo(({ product, addItem }: MenuItemProps) => {
   const { imageURL, name, description } = product;
 
   return (
@@ -33,10 +42,25 @@ const MenuItem = ({ product }: MenuItemProps) => {
             {description}
           </Typography>
         </CardContent>
+        <CardActions>
+          <Button
+            onClick={() =>
+              addItem((prevTotal) => {
+                return prevTotal + 1;
+              })
+            }
+            size="small"
+            color="primary"
+          >
+            Add item
+          </Button>
+        </CardActions>
       </Card>
     </div>
   );
-};
+});
+
+MenuItem.displayName = 'MenuItem';
 
 interface Menu {
   products: [Product];
@@ -65,11 +89,16 @@ const queryMenu = graphql`
 `;
 
 export function Menu() {
+  const [total, setTotal] = React.useState(0);
   const match = useRouteMatch();
   const variables = match.params;
 
   return (
     <div className="menu-container">
+      <div className="menu-container-total">
+        <ShoppingCartIcon />
+        <Typography>{`(${total})`}</Typography>
+      </div>
       <QueryRenderer
         environment={environment}
         query={queryMenu}
@@ -83,7 +112,7 @@ export function Menu() {
           }
 
           return props.menu.products.map((product) => (
-            <MenuItem key={product.name} product={product} />
+            <MenuItem key={product.name} product={product} addItem={setTotal} />
           ));
         }}
       />

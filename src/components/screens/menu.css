@@ -9,6 +9,11 @@
     margin: 0 auto;
 }
 
+.menu-container-total {
+    display: flex;
+    flex-direction: row;
+    margin: 20px;
+}
 .menu-element {
     font-size: 14px;
 }
