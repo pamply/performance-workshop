@@ -78,15 +78,9 @@ const queryRestaurantList = graphql`
 
 function RestaurantList({ queryReference }) {
   const data = usePreloadedQuery(queryRestaurantList, queryReference);
-  return (
-    <Suspense fallback={<SkeletonLoader />}>
-      <>
-        {data.restaurants.map((restaurant) => (
-          <RestaurantItem key={restaurant.id} restaurant={restaurant} />
-        ))}
-      </>
-    </Suspense>
-  );
+  return data.restaurants.map((restaurant) => (
+    <RestaurantItem key={restaurant.id} restaurant={restaurant} />
+  ));
 }
 
 export default function RestaurantListFetch() {
@@ -98,23 +92,9 @@ export default function RestaurantListFetch() {
 
   return (
     <div className="restaurant-list-container">
-      {queryReference && <RestaurantList queryReference={queryReference} />}
-      {/* <QueryRenderer
-        environment={environment}
-        variables={{}}
-        query={queryRestaurantList}
-        render={({ error, props }: RenderProps) => {
-          if (error) {
-            return <div>Error</div>;
-          }
-          if (!props) {
-            return <SkeletonLoader />;
-          }
-          return props.restaurants.map((restaurant) => (
-            <RestaurantItem key={restaurant.id} restaurant={restaurant} />
-          ));
-        }}
-      /> */}
+      <Suspense fallback={<SkeletonLoader />}>
+        {queryReference && <RestaurantList queryReference={queryReference} />}
+      </Suspense>
     </div>
   );
 }
