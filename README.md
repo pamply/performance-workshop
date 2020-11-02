@@ -71,3 +71,21 @@ JSConf repository
 1. git checkout `fetch-on-render`
 2. git checkout `fetch-then-render`
 3. git checkout `render-as-you-fetch`
+
+#### Extra
+
+Addin to your bash:
+
+`vi ~/.bash_profile`
+
+or
+
+`vi ~/.zshrc`
+
+```
+alias gs='git status'
+alias gc='git checkout'
+alias code='"/Applications/Visual Studio Code.app/Contents/MacOS/Electron"'
+alias gcurr='git branch --show-current'
+alias gb='git branch'
+```
