@@ -36,8 +36,8 @@ JSConf repository
 
 ### Memoization
 
-1. git checkout `react-memo-item-images`
-2. git checkout `debounce-search`
+1. git checkout `memoization-list-images`
+2. git checkout `memoization-usecallback-list-images`
 
 ### Render as you fetch
 
