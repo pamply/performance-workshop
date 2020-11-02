@@ -48,7 +48,7 @@ JSConf repository
 
 3. `npm run relay`
 
-4. `num run build`
+4. `npm run build`
 
 ### Start app
 
