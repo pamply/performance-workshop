@@ -30,7 +30,17 @@ module.exports = {
         host: "localhost",
         port: 9000,
         inline: false,
-        historyApiFallback: true,
+        historyApiFallback: {
+            rewrites: [
+              {
+                from: /^\/[A-Za-z]*\/[A-Za-z]*\.js$/,
+                to: function (context) {
+                  const fileName = context.parsedUrl.pathname.split('/').pop();
+                  return `/${fileName}`;
+                },
+              },
+            ],
+          },
         contentBase: [
             path.join(__dirname, 'assets'),
             path.join(__dirname, 'dist')
