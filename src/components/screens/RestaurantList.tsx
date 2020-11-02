@@ -13,6 +13,7 @@ import { SkeletonLoader } from '../core/SkeletonLoader';
 
 import React from 'react';
 import environment from '../../api/setup';
+import { useLazyLoadingElements } from '../hooks/useLazyLoadingElements';
 
 enum Category {
   SEAFOOD = 'Seafood',
@@ -37,38 +38,13 @@ interface RenderProps {
 }
 
 const RestaurantItem = ({ restaurant }: { restaurant: Restaurant }) => {
-  const [showItem, setShowItem] = React.useState(false);
-  const containerRef = React.useRef();
-  const observerCallback: IntersectionObserverCallback = (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        setShowItem(true);
-      }
-    });
-  };
-  const options: IntersectionObserverInit = {
-    threshold: 1.0,
-  };
-
+  const { isVisible, containerRef } = useLazyLoadingElements();
   const history = useHistory();
-  const observer = React.useRef(
-    new IntersectionObserver(observerCallback, options)
-  );
 
-  React.useLayoutEffect(() => {
-    let targetToUnobserve = null;
-    if (containerRef.current) {
-      observer.current.observe(containerRef.current);
-      targetToUnobserve = containerRef.current;
-    }
-    return () => {
-      observer.current.unobserve(targetToUnobserve);
-    };
-  }, [observer, containerRef]);
   const { name, description, imageURL, id } = restaurant;
   return (
     <div className="restaurant-element" ref={containerRef}>
-      {showItem && (
+      {isVisible && (
         <Card className={'restaurant-element-card'}>
           <CardMedia image={imageURL} className="restaurant-element-img" />
           <CardContent>

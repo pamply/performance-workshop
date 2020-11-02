@@ -6,6 +6,7 @@ import { useRouteMatch } from 'react-router-dom';
 import { SkeletonLoader } from '../core/SkeletonLoader';
 
 import React from 'react';
+import { useLazyLoadingElements } from '../hooks/useLazyLoadingElements';
 
 interface Product {
   name: string;
@@ -20,20 +21,22 @@ interface MenuItemProps {
 
 const MenuItem = ({ product }: MenuItemProps) => {
   const { imageURL, name, description } = product;
-
+  const { isVisible, containerRef } = useLazyLoadingElements();
   return (
-    <div className="menu-element">
-      <Card className={'menu-element-card'}>
-        <CardMedia image={imageURL} className="menu-element-img" />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            {name}
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            {description}
-          </Typography>
-        </CardContent>
-      </Card>
+    <div className="menu-element" ref={containerRef}>
+      {isVisible && (
+        <Card className={'menu-element-card'}>
+          <CardMedia image={imageURL} className="menu-element-img" />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="h2">
+              {name}
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+              {description}
+            </Typography>
+          </CardContent>
+        </Card>
+      )}
     </div>
   );
 };
