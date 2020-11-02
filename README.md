@@ -29,21 +29,18 @@ JSConf repository
 
 ### Lazy loading
 
-
 1. git checkout `basic-lazy-loading`
-2. git checkout `refactor-lazy-loading`
-3. git checkout `basic-infinite-scrolling`
-4. git checkout `refactor-infinite-scrolling`
+2. git checkout `improved-lazy-loading`
+3. git checkout `lazy-loading-images`
+4. git checkout `hook-lazy-loading-images`
 
 ### Memoization
 
-1. git checkout `debounce-search`
-2. git checkout `custom-memoize-function`
-3. git checkout `react-memo-item-images`
-3. git checkout `use-memo-example`
+1. git checkout `react-memo-item-images`
+2. git checkout `debounce-search`
 
 ### Render as you fetch
 
 1. git checkout `fetch-on-render`
-2. git checkout `render-as-you-fetch-custom`
-3. git checkout `render-as-you-fetch-relay`
+2. git checkout `fetch-then-render`
+3. git checkout `render-as-you-fetch`
