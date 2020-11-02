@@ -3,7 +3,11 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { RelayEnvironmentProvider } from 'react-relay/hooks';
 import { Layout } from './components/core/Layout';
-import { withLazyScreen } from './components/screens/LazyScreen';
+import {
+  withLazyScreen,
+  useFetchThenRender,
+} from './components/screens/LazyScreen';
+import { queryRestaurantList } from './components/screens/RestaurantListQuery';
 import environment from './api/setup';
 
 function App() {
@@ -17,7 +21,10 @@ function App() {
             <Route path="/profile" component={withLazyScreen('Profile')} />
             <Route
               path="/restaurant-list"
-              component={withLazyScreen('RestaurantList')}
+              component={useFetchThenRender(
+                'RestaurantList',
+                queryRestaurantList
+              )}
             />
             <Route
               path="/menu/:restaurantID"

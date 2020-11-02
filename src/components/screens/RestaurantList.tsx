@@ -7,12 +7,9 @@ import {
   CardMedia,
   Typography,
 } from '@material-ui/core';
-import { graphql } from 'react-relay';
 import './restaurant-list.css';
-import { SkeletonLoader } from '../core/SkeletonLoader';
-import { useQueryLoader, usePreloadedQuery } from 'react-relay/hooks';
 
-import React, { Suspense } from 'react';
+import React from 'react';
 
 enum Category {
   SEAFOOD = 'Seafood',
@@ -65,56 +62,12 @@ const RestaurantItem = ({ restaurant }: { restaurant: Restaurant }) => {
   );
 };
 
-const queryRestaurantList = graphql`
-  query RestaurantListQuery {
-    restaurants {
-      id
-      name
-      description
-      imageURL
-    }
-  }
-`;
-
-function RestaurantList({ queryReference }) {
-  const data = usePreloadedQuery(queryRestaurantList, queryReference);
-  return (
-    <Suspense fallback={<SkeletonLoader />}>
-      <>
-        {data.restaurants.map((restaurant) => (
-          <RestaurantItem key={restaurant.id} restaurant={restaurant} />
-        ))}
-      </>
-    </Suspense>
-  );
-}
-
-export default function RestaurantListFetch() {
-  const [queryReference, loadQuery] = useQueryLoader(queryRestaurantList);
-
-  React.useEffect(() => {
-    loadQuery({});
-  }, [loadQuery]);
-
+export default function RestaurantList({ data }) {
   return (
     <div className="restaurant-list-container">
-      {queryReference && <RestaurantList queryReference={queryReference} />}
-      {/* <QueryRenderer
-        environment={environment}
-        variables={{}}
-        query={queryRestaurantList}
-        render={({ error, props }: RenderProps) => {
-          if (error) {
-            return <div>Error</div>;
-          }
-          if (!props) {
-            return <SkeletonLoader />;
-          }
-          return props.restaurants.map((restaurant) => (
-            <RestaurantItem key={restaurant.id} restaurant={restaurant} />
-          ));
-        }}
-      /> */}
+      {data.restaurants.map((restaurant) => (
+        <RestaurantItem key={restaurant.id} restaurant={restaurant} />
+      ))}
     </div>
   );
 }
