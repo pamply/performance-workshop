@@ -43,15 +43,7 @@ const MenuItem = React.memo(({ product, addItem }: MenuItemProps) => {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button
-            onClick={() =>
-              addItem((prevTotal) => {
-                return prevTotal + 1;
-              })
-            }
-            size="small"
-            color="primary"
-          >
+          <Button onClick={() => addItem()} size="small" color="primary">
             Add item
           </Button>
         </CardActions>
@@ -93,6 +85,12 @@ export function Menu() {
   const match = useRouteMatch();
   const variables = match.params;
 
+  const sumTotal = React.useCallback(function () {
+    setTotal((prevValue) => {
+      return prevValue + 1;
+    });
+  }, []);
+
   return (
     <div className="menu-container">
       <div className="menu-container-total">
@@ -112,7 +110,7 @@ export function Menu() {
           }
 
           return props.menu.products.map((product) => (
-            <MenuItem key={product.name} product={product} addItem={setTotal} />
+            <MenuItem key={product.name} product={product} addItem={sumTotal} />
           ));
         }}
       />
