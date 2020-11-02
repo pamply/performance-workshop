@@ -37,30 +37,59 @@ interface RenderProps {
 }
 
 const RestaurantItem = ({ restaurant }: { restaurant: Restaurant }) => {
+  const [showItem, setShowItem] = React.useState(false);
+  const containerRef = React.useRef();
+  const observerCallback: IntersectionObserverCallback = (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        setShowItem(true);
+      }
+    });
+  };
+  const options: IntersectionObserverInit = {
+    threshold: 1.0,
+  };
+
   const history = useHistory();
+  const observer = React.useRef(
+    new IntersectionObserver(observerCallback, options)
+  );
+
+  React.useLayoutEffect(() => {
+    let targetToUnobserve = null;
+    if (containerRef.current) {
+      observer.current.observe(containerRef.current);
+      targetToUnobserve = containerRef.current;
+    }
+    return () => {
+      observer.current.unobserve(targetToUnobserve);
+    };
+  }, [observer, containerRef]);
   const { name, description, imageURL, id } = restaurant;
   return (
-    <div className="restaurant-element">
-      <Card className={'restaurant-element-card'}>
-        <CardMedia image={imageURL} className="restaurant-element-img" />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            {name}
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            {description}
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <Button
-            onClick={() => history.push(`/menu/${id}`)}
-            size="small"
-            color="primary"
-          >
-            Go to restaurant
-          </Button>
-        </CardActions>
-      </Card>
+    <div className="restaurant-element" ref={containerRef}>
+      {showItem && (
+        <Card className={'restaurant-element-card'}>
+          <CardMedia image={imageURL} className="restaurant-element-img" />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="h2">
+              {name}
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+              {description}
+            </Typography>
+          </CardContent>
+          <CardActions>
+            <Button
+              onClick={() => history.push(`/menu/${id}`)}
+              size="small"
+              color="primary"
+            >
+              Go to restaurant
+            </Button>
+          </CardActions>
+        </Card>
+      )}
     </div>
   );
 };
