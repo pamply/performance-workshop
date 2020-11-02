@@ -8,6 +8,7 @@ import {
   Typography,
 } from '@material-ui/core';
 import './restaurant-list.css';
+import { usePreloadedQuery } from 'react-relay/hooks';
 
 import React from 'react';
 
@@ -62,7 +63,8 @@ const RestaurantItem = ({ restaurant }: { restaurant: Restaurant }) => {
   );
 };
 
-export default function RestaurantList({ data }) {
+export default function RestaurantList({ queryReference, query }) {
+  const data = usePreloadedQuery(query, queryReference);
   return (
     <div className="restaurant-list-container">
       {data.restaurants.map((restaurant) => (

@@ -5,7 +5,7 @@ import { RelayEnvironmentProvider } from 'react-relay/hooks';
 import { Layout } from './components/core/Layout';
 import {
   withLazyScreen,
-  useFetchThenRender,
+  useRenderAsYouFetch,
 } from './components/screens/LazyScreen';
 import { queryRestaurantList } from './components/screens/RestaurantListQuery';
 import environment from './api/setup';
@@ -21,7 +21,7 @@ function App() {
             <Route path="/profile" component={withLazyScreen('Profile')} />
             <Route
               path="/restaurant-list"
-              component={useFetchThenRender(
+              component={useRenderAsYouFetch(
                 'RestaurantList',
                 queryRestaurantList
               )}

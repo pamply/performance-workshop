@@ -47,3 +47,18 @@ function ComponentWithPreloadedQuery({
   const data = usePreloadedQuery(query, queryReference);
   return <Component {...props} data={data} />;
 }
+
+export function useRenderAsYouFetch(modulePath: string, query) {
+  const Component = withLazyScreen(modulePath);
+  return function Fetch(props) {
+    const [queryReference, loadQuery] = useQueryLoader(query);
+    useEffect(() => {
+      loadQuery({});
+    }, [loadQuery]);
+    return (
+      queryReference && (
+        <Component {...props} queryReference={queryReference} query={query} />
+      )
+    );
+  };
+}
