@@ -7,12 +7,12 @@ import {
   CardMedia,
   Typography,
 } from '@material-ui/core';
-import { QueryRenderer, graphql } from 'react-relay';
+import { graphql } from 'react-relay';
 import './restaurant-list.css';
 import { SkeletonLoader } from '../core/SkeletonLoader';
+import { useQueryLoader, usePreloadedQuery } from 'react-relay/hooks';
 
-import React from 'react';
-import environment from '../../api/setup';
+import React, { Suspense } from 'react';
 
 enum Category {
   SEAFOOD = 'Seafood',
@@ -76,10 +76,30 @@ const queryRestaurantList = graphql`
   }
 `;
 
-export default function RestaurantList() {
+function RestaurantList({ queryReference }) {
+  const data = usePreloadedQuery(queryRestaurantList, queryReference);
+  return (
+    <Suspense fallback={<SkeletonLoader />}>
+      <>
+        {data.restaurants.map((restaurant) => (
+          <RestaurantItem key={restaurant.id} restaurant={restaurant} />
+        ))}
+      </>
+    </Suspense>
+  );
+}
+
+export default function RestaurantListFetch() {
+  const [queryReference, loadQuery] = useQueryLoader(queryRestaurantList);
+
+  React.useEffect(() => {
+    loadQuery({});
+  }, [loadQuery]);
+
   return (
     <div className="restaurant-list-container">
-      <QueryRenderer
+      {queryReference && <RestaurantList queryReference={queryReference} />}
+      {/* <QueryRenderer
         environment={environment}
         variables={{}}
         query={queryRestaurantList}
@@ -94,7 +114,7 @@ export default function RestaurantList() {
             <RestaurantItem key={restaurant.id} restaurant={restaurant} />
           ));
         }}
-      />
+      /> */}
     </div>
   );
 }
